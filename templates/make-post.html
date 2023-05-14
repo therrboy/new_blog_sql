@@ -1,0 +1,65 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+    {{ super() }}
+    {{ ckeditor.load() }}
+    <script>
+        CKEDITOR.config.autoParagraph = false;
+        CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+        console.log(CKEDITOR.config.autoParagraph);
+    </script>
+{% endblock %}
+
+{% block content %}
+{% include "header.html" %}
+
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/edit-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>New Post</h1>
+            <span class="subheading">You're going to make a great blog post!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        
+        <form method="POST" action="{{ url_for('new_post_def') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <b>{{ form.title.label(class_="form-control-label") }}</b>
+                {{ form.title(class_="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                <b>{{ form.subtitle.label(class_="form-control-label") }}</b>
+                {{ form.subtitle(class_="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                <b>{{ form.author.label(class_="form-control-label") }}</b>
+                {{ form.author(class_="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                <b>{{ form.img_url.label(class_="form-control-label") }}</b>
+                {{ form.img_url(class_="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                <b>{{ form.body.label(class_="form-control-label") }}</b>
+                {{ form.body(class_="form-control form-control-lg") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class_="btn btn-primary") }}
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% include "footer.html" %}
+{% endblock %}

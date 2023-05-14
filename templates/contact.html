@@ -1,0 +1,59 @@
+{% include "header.html" %}
+
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/contact-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+              {% if msg_sent %}
+                  <h1>Mensaje enviado con exito</h1>
+              {% else %}
+                  <h1>Hablemos</h1>
+              {% endif %}
+              <span class="subheading">Tiene preguntas? Yo tengo respuestas.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
+
+        <form id="contactForm" action="{{ url_for("contact") }}" method="post">
+                                <div class="form-floating">
+                                    <label>Name</label>
+                                    <input class="form-control" id="name" name="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                    <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" id="email" name="email" type="email"  placeholder="Enter your email..." data-sb-validations="required,email" />
+                                    <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <label for="phone">Phone number</label>
+                                    <input class="form-control" id="phone" name="phone" type="tel" phone=phone placeholder="Enter your phone number..." data-sb-validations="required" />
+                                    <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                                </div>
+                                <div class="form-floating">
+                                    <label for="message">Message</label>
+                                    <textarea class="form-control" id="message" name="message" message=message placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required"></textarea>
+                                    <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                                </div>
+                                <br />
+                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+
+                                <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Enviar</button>
+                            </form>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+{% include "footer.html" %}

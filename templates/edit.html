@@ -1,0 +1,91 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+    {{ super() }}
+    {{ ckeditor.load() }}
+{% endblock %}
+
+{% block content %}
+{% include "header.html" %}
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/edit-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Edit</h1>
+            <span class="subheading">You're going to edit!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+            <form method="POST" action="{{ url_for('edit', id=blog.id) }}" >
+            <div class="edit_blog">
+                  {{ form.title.label }}<br>
+                  {{ form.title() }}
+                  {{ form.csrf_token }}
+                  {% if form.errors %}
+                        <div class="alert alert-danger">
+                  {{ form.errors }}
+                        </div>
+                  {% endif %}
+            </div>
+
+            <div class="edit_blog">
+                {{ form.subtitle.label }}<br>
+                {{ form.subtitle() }}
+                {{ form.csrf_token }}
+                {% if form.errors %}
+                        <div class="alert alert-danger">
+                {{ form.errors }}
+                        </div>
+                {% endif %}
+            </div>
+
+            <div class="edit_blog">
+                        {{ form.author.label }}<br>
+                        {{ form.author() }}
+                        {{ form.csrf_token }}
+                        {% if form.errors %}
+                                <div class="alert alert-danger">
+                        {{ form.errors }}
+                                </div>
+                        {% endif %}
+            </div><br>
+
+            <div class="edit_blog">
+                        {{ form.img_url.label }}<br>
+                        {{ form.img_url() }}
+                        {{ form.csrf_token }}
+                        {% if form.errors %}
+                                <div class="alert alert-danger">
+                        {{ form.errors }}
+                                </div>
+                        {% endif %}
+            </div><br>
+
+            <div class="edit_blog">
+                        {{ form.body.label }}<br>
+                        {{ form.body() }}
+                        {{ form.csrf_token }}
+                        {% if form.errors %}
+                                <div class="alert alert-danger">
+                        {{ form.errors }}
+                                </div>
+                        {% endif %}
+            </div><br>
+
+        <p class="btn-primary float-left" id="button">{{ form.submit(value="Enviar", class="btn") }}</p>
+    </form>
+      </div>
+    </div>
+  </div>
+
+{% include "footer.html" %}
+{% endblock %}
